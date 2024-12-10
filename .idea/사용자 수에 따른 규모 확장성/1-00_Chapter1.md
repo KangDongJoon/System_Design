@@ -12,7 +12,7 @@
 
 ## (1) 단일서버
 
-![1.single_server.JPG](../images/Chapter1/1.single_server.JPG)
+![1.single_server.JPG](../images/chapter1/1.single_server.JPG)
 
 1. 사용자가 도메인 이름을 이용하여 웹사이트에 접속
 2. 접속을 위해서 DNS에 질의하여 IP주소로 변환하는 과정 필요(DNS는 보통 외부시스템)
@@ -20,7 +20,7 @@
 4. 요청받은 웹 서버는 HTML페이지나 JSON형태의 응답 반환
 
 ## (2) 데이터베이스
-![1.database.JPG](../images/Chapter1/1.database.JPG)
+![1.database.JPG](../images/chapter1/1.database.JPG)
 
 - 사용자 증가 시 (1)의 과정에서 서버와 데이터베이스를 분리
 - 하나는 트래픽을 처리
@@ -51,7 +51,7 @@
     - (1),(2)의 경우에서 웹서버가 다운되거나 많은 사용자가 몰리게되면 응답속도가 느려지거나 접속이 불가하게된다.
     - 이 문제를 해결하기 위해 부하 분산기 또는 로드밸런서(load balancer)를 도입한다.
 
-![1.loadbalancer.JPG](../images/Chapter1/1.loadbalancer.JPG)
+![1.loadbalancer.JPG](../images/chapter1/1.loadbalancer.JPG)
 
 1. 사용자는 공개 IP(Public IP)로 접속(웹 서버는 클라이언트의 접속을 직접 처리하지 않음)
 2. 보안을 위해 서버간 통신에는 사설 IP 주소(Private IP Address)가 이용된다.
@@ -68,7 +68,7 @@
 - 쓰기 연산(write operation)은 마스터에서만 지원한다.
 - 부 부데이터베이스 주 데이터베이스로부터 그 사본을 전달받으며, 읽기 연산(read operation)만을 지원한다.
 
-![1.database_redundancy.JPG](../images/Chapter1/1.database_redundancy.JPG)
+![1.database_redundancy.JPG](../images/chapter1/1.database_redundancy.JPG)
 
 - 장점
     1. 성능향상 : 주-부 다중화 모델에서 모든 데이터 변경 연산은 주 데이터베이스 서버로만 전달되는 반면 읽기 연산은 부 데이터베이스 서버들로 분산되므로 병렬로 처리될 수 있는 query의 수가 늘어나므로 성능이 좋아진다.
@@ -83,7 +83,7 @@
 
 <br>
 
-![1.cashe.JPG](../images/Chapter1/1.cashe.JPG)
+![1.cashe.JPG](../images/chapter1/1.cashe.JPG)
 > 어플리케이션의 성능은 데이터베이스를 얼마나 자주 호출하느냐에 크게 좌우되는데, 캐시는 그런 문제를 완화할 수 있다.
 
 - 흐름
@@ -109,7 +109,7 @@
 <br> 
 
 - 로딩시간 개선 예시
-  ![1-9.CDN.JPG](../images/Chapter1/1-9.CDN.JPG)
+  ![1-9.CDN.JPG](../images/chapter1/1-9.CDN.JPG)
 
 - 사용 시 고려해야 할 사항
     - 비용 : 보통 제3 사업자에 의해 운영되며, CDN에 들어가고 나가는 데이터 전송 양에 따라 과금이되므로 자주 사용되지 안흔 콘텐츠를 캐싱하는 것은 이득이 크지 않으므로 CDN에서 뺴는 것을 고려해야한다.
@@ -120,7 +120,7 @@
         2. 콘텐츠의 다른 버전을 서비스하도록 오브젝트 버저닝이용, 콘텐츠의 새로운 버전을 지정하기 위해서는 URL 마지막에 버전 번호를 인자로 주면 된다 예를 들어inmage.png?v=2와 같은 식이다.
 
 - CDN이 추가된 설계
-  ![1-9.CDN_arc.JPG](../images/Chapter1/1-9.CDN_arc.JPG)
+  ![1-9.CDN_arc.JPG](../images/chapter1/1-9.CDN_arc.JPG)
 
 - ① 정적 콘텐츠(JS, CSS, 이미지 등)는 더 이상 웹 서버를 통해 서비스하지 않으며, CND을 통해 제공하여 더 나은 성능을 보장한다.
 - ② 캐시가 데이터베이스 부하를 줄여준다.
@@ -128,20 +128,20 @@
 ## (7) 무상태(stateless) 웹 계층
 
 - 상태 의존적인 아키텍쳐
-  ![1-10.dependency_arc.JPG](../images/Chapter1/1-10.dependency_arc.JPG)
+  ![1-10.dependency_arc.JPG](../images/chapter1/1-10.dependency_arc.JPG)
     - 위 그림에서 사용자 A가 서버 2에 요청하게되면 인증이 실패하게된다.
     - 이를 해결하기 위해서는 로드밸런서에서 고정 세션이라는 기능을 사용해야하는데 이는 로드밸런서에 부담을 준다.
     - 장애 처리도 힘들고, 서버 확장도 어렵게된다.
 
 - 무상태 아키텍쳐
-  ![1-10.undependency_arc.JPG](../images/Chapter1/1-10.undependency_arc.JPG)
+  ![1-10.undependency_arc.JPG](../images/chapter1/1-10.undependency_arc.JPG)
     - 위 그림에서서 사용자로부터의 요청은 어떤 웹 서버로도 전달 될 수 있다.
     - 웹 서버는 상태 정보가 필요할 경우 공유 저장소로부터 데이터를 가져온다.
     - 이런 구조는 단순하고, 안정적이며, 규모 확장이 쉽다.
 
 ## (8) 데이터 센터
 
-![1-11.datacenter_arc.JPG](../images/Chapter1/1-11.datacenter_arc.JPG)
+![1-11.datacenter_arc.JPG](../images/chapter1/1-11.datacenter_arc.JPG)
 > 가장 가까운 데이터 센터로 안내되는 지리적 라우팅(geoDNS-routing 또는 geo-routing)
 > <br>※ x%의 사용자는 US-East로 (100-x)%는 US-West로 안내된다고 가정
 
@@ -155,7 +155,7 @@
 
 > 메시지의 무손실(durability, 즉 메시지 큐에 일단 보관된 메시지는 소비자가 꺼낼 때까지 안전히 보관된다는 특성)을 보장하는, 비동기 통신(asynchronous communication)을 지원하는 컴포넌트다.
 
-![1-12.mq.JPG](../images/Chapter1/1-12.mq.JPG)
+![1-12.mq.JPG](../images/chapter1/1-12.mq.JPG)
 
 - 생산자 또는 발행자(producer/publisher)라고 불리는 입력 서비스가 메시지를 생성
 - 메시지 큐에 발행(publish)한다.
@@ -175,7 +175,7 @@
 
 > 대규모 데이터베이스를 샤트라고 부르는 작은 단위로 분할하는 기술, 모든 샤드는 같은 스키마를 쓰지만 샤드에 보관되는 데이터 사이에 중복이 있어서는 안된다.
 
-![1-11.sharding.JPG](../images/Chapter1/1-11.sharding.JPG)
+![1-11.sharding.JPG](../images/chapter1/1-11.sharding.JPG)
 
 위 그림은 user_id % 4를 해시 함수로 사용하여 데이터가 보관되는 샤드를 정한다.
 
