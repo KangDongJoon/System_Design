@@ -43,8 +43,13 @@ N개의 캐시 서버가 있다고 가정할 때 이 서버들에 부하를 균�
 ![contsistence_hash_ring.JPG](../images/chapter5/contsistence_hash_ring.JPG)
 
 > 그림과 같이 서버 수의 변동이 생겨도 일부 키만 재배치하게 된다.
+<br>
 
- 
+## 가상 노드
+> 키의 위치로부터 시계방향으로 링을 탐색하다 만나는 최초의 가상 노드가 해당 키가 저장될 서버가 된다.<br>
+> 가상 노드의 개수를 늘리면 키의 분포는 점점 더 균등해진다.
+
+![vertual_node.JPG](../images/chapter5/vertual_node.JPG)
 
 
 
